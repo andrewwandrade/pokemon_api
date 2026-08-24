@@ -1,0 +1,34 @@
+{
+  "name": "pokemon_api",
+  "version": "1.0.0",
+  "description": "Repositório que objetiva armazenar o projeto realizado durante a disciplina de Tópicos Especiais em Engenharia de Software.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/main/server.ts",
+    "build": "tsc",
+    "lint": "eslint src --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewwandrade/pokemon_api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/andrewwandrade/pokemon_api/issues"
+  },
+  "homepage": "https://github.com/andrewwandrade/pokemon_api#readme",
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.68.0",
+    "@typescript-eslint/parser": "^8.68.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.12",
+    "typescript": "^5.9.3"
+  }
+}
