@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/andrewwandrade/pokemon_api#readme",
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^26.2.0",
     "@typescript-eslint/eslint-plugin": "^8.68.0",
     "@typescript-eslint/parser": "^8.68.0",
@@ -30,5 +31,8 @@
     "prettier": "^3.9.6",
     "tsx": "^4.23.12",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
