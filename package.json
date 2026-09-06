@@ -4,8 +4,10 @@
   "description": "Repositório que objetiva armazenar o projeto realizado durante a disciplina de Tópicos Especiais em Engenharia de Software.",
   "main": "index.js",
   "scripts": {
+    "swagger": "tsx src/main/config/swagger-generator.ts",
+    "start": "npm run swagger && tsx watch src/main/server.ts",
+    "build": "npm run swagger && tsc",
     "dev": "tsx watch src/main/server.ts",
-    "build": "tsc",
     "lint": "eslint src --ext .ts"
   },
   "repository": {
@@ -23,16 +25,19 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^26.2.0",
+    "@types/swagger-ui-express": "^4.1.8",
     "@typescript-eslint/eslint-plugin": "^8.68.0",
     "@typescript-eslint/parser": "^8.68.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "prettier": "^3.9.6",
+    "swagger-autogen": "^2.23.7",
     "tsx": "^4.23.12",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "swagger-ui-express": "^5.0.1"
   }
 }
