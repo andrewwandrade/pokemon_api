@@ -2,7 +2,7 @@ import { Pokemon } from '@domain/entities/pokemon';
 import { IPokemonRepository } from '@domain/repositories/IPokemonRepository';
 import { UpdatePokemonDTO } from '@application/dtos/updatePokemonDTO';
 
-export class updatePokemonUseCase{
+export class UpdatePokemonUseCase{
     constructor(
         private readonly pokemonRepository: IPokemonRepository
     ){}
