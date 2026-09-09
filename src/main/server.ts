@@ -1,7 +1,7 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 
-import { pokemonRoutes } from '../infrastructure/http/routes/pokemonRoutes'; 
+import { pokemonRoutes } from '../infrastructure/http/routes/pokemonRoutes';
 import swaggerDocument from './config/swagger-output.json';
 
 const app = express();

@@ -19,9 +19,7 @@
   "paths": {
     "/pokemons": {
       "get": {
-        "tags": [
-          "Pokemons"
-        ],
+        "tags": ["Pokemons"],
         "summary": "Lista todos os pokémons",
         "description": "Retorna uma lista de pokémons cadastrados.",
         "responses": {
@@ -32,9 +30,7 @@
         "deprecated": false
       },
       "post": {
-        "tags": [
-          "Pokemons"
-        ],
+        "tags": ["Pokemons"],
         "summary": "Cria um novo pokémon",
         "description": "Cadastra um novo pokémon com os dados informados no corpo da requisição.",
         "responses": {
@@ -68,12 +64,7 @@
                   "example": 60
                 }
               },
-              "required": [
-                "name",
-                "type",
-                "height",
-                "weight"
-              ]
+              "required": ["name", "type", "height", "weight"]
             }
           }
         },
@@ -82,9 +73,7 @@
     },
     "/pokemons/{id}": {
       "get": {
-        "tags": [
-          "Pokemons"
-        ],
+        "tags": ["Pokemons"],
         "summary": "Busca um pokémon pelo ID",
         "description": "Retorna os dados de um único pokémon a partir do seu ID.",
         "parameters": [
@@ -117,9 +106,7 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "Pokemons"
-        ],
+        "tags": ["Pokemons"],
         "summary": "Atualiza dados de um Pokémon",
         "description": "Altera as informações de um Pokémon existente pelo seu ID.",
         "parameters": [
@@ -174,9 +161,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Pokemons"
-        ],
+        "tags": ["Pokemons"],
         "summary": "Remove um Pokémon do catálogo",
         "description": "Exclui permanentemente um Pokémon do registro local.",
         "parameters": [

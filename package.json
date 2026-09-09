@@ -8,7 +8,9 @@
     "start": "npm run swagger && tsx watch src/main/server.ts",
     "build": "npm run swagger && tsc",
     "dev": "tsx watch src/main/server.ts",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write src"
   },
   "repository": {
     "type": "git",

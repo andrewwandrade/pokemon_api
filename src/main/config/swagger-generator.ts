@@ -40,6 +40,8 @@ const doc = {
 
 const outputFile = path.resolve(__dirname, 'swagger-output.json');
 
-const endpointsFiles = [path.resolve(__dirname, '../../infrastructure/http/routes/pokemonRoutes.ts')];
+const endpointsFiles = [
+  path.resolve(__dirname, '../../infrastructure/http/routes/pokemonRoutes.ts'),
+];
 
 swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc);
