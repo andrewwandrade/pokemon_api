@@ -17,6 +17,7 @@ Criação da estrutura base com Clean Architecture e gerenciamento do catálogo 
 
 ### Estrutura do projeto
 
+```
 /
 │   .eslintrc.json
 │   .gitignore
@@ -68,7 +69,7 @@ Criação da estrutura base com Clean Architecture e gerenciamento do catálogo 
         │
         └───factories
                 pokemonController.factory.ts
-
+```
 
 ### Fluxo de Funcionamento do Projeto
 
