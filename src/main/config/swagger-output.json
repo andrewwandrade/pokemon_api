@@ -19,52 +19,149 @@
   "paths": {
     "/pokemons": {
       "get": {
-        "tags": ["Pokemons"],
+        "tags": [
+          "Pokemons"
+        ],
         "summary": "Lista todos os pokémons",
         "description": "Retorna uma lista de pokémons cadastrados.",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Filtra pokémons pelo tipo (ex: electric, fire, water)",
+            "example": "electric",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Lista de pokémons retornada com sucesso"
+            "description": "Lista de pokémons retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "1"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Pikachu"
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "electric"
+                      },
+                      "height": {
+                        "type": "number",
+                        "example": 4
+                      },
+                      "weight": {
+                        "type": "number",
+                        "example": 60
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "deprecated": false
       },
       "post": {
-        "tags": ["Pokemons"],
+        "tags": [
+          "Pokemons"
+        ],
         "summary": "Cria um novo pokémon",
         "description": "Cadastra um novo pokémon com os dados informados no corpo da requisição.",
         "responses": {
           "201": {
-            "description": "Pokémon criado com sucesso"
+            "description": "Pokémon criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Pikachu"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "electric"
+                    },
+                    "height": {
+                      "type": "number",
+                      "example": 4
+                    },
+                    "weight": {
+                      "type": "number",
+                      "example": 60
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "Dados inválidos"
+            "description": "Campos obrigatórios ausentes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Campos obrigatórios ausentes."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Pikachu"
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Pikachu"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "electric"
+                  },
+                  "height": {
+                    "type": "number",
+                    "example": 4
+                  },
+                  "weight": {
+                    "type": "number",
+                    "example": 60
+                  }
                 },
-                "type": {
-                  "type": "string",
-                  "example": "electric"
-                },
-                "height": {
-                  "type": "number",
-                  "example": 4
-                },
-                "weight": {
-                  "type": "number",
-                  "example": 60
-                }
-              },
-              "required": ["name", "type", "height", "weight"]
+                "required": [
+                  "name",
+                  "type",
+                  "height",
+                  "weight"
+                ]
+              }
             }
           }
         },
@@ -73,7 +170,9 @@
     },
     "/pokemons/{id}": {
       "get": {
-        "tags": ["Pokemons"],
+        "tags": [
+          "Pokemons"
+        ],
         "summary": "Busca um pokémon pelo ID",
         "description": "Retorna os dados de um único pokémon a partir do seu ID.",
         "parameters": [
@@ -90,14 +189,65 @@
         ],
         "responses": {
           "200": {
-            "description": "Pokémon encontrado"
+            "description": "Pokémon encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Pikachu"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "electric"
+                    },
+                    "height": {
+                      "type": "number",
+                      "example": 4
+                    },
+                    "weight": {
+                      "type": "number",
+                      "example": 60
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ID inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ID inválido."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
             "description": "Pokémon não encontrado",
             "content": {
               "application/json": {
                 "schema": {
-                  "message": "Pokémon não encontrado"
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Pokémon não encontrado"
+                    }
+                  }
                 }
               }
             }
@@ -106,7 +256,9 @@
         "deprecated": false
       },
       "put": {
-        "tags": ["Pokemons"],
+        "tags": [
+          "Pokemons"
+        ],
         "summary": "Atualiza dados de um Pokémon",
         "description": "Altera as informações de um Pokémon existente pelo seu ID.",
         "parameters": [
@@ -122,13 +274,68 @@
         ],
         "responses": {
           "200": {
-            "description": "Pokémon atualizado com sucesso"
+            "description": "Pokémon atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Raichu"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "electric"
+                    },
+                    "height": {
+                      "type": "number",
+                      "example": 8
+                    },
+                    "weight": {
+                      "type": "number",
+                      "example": 300
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "ID inválido"
+            "description": "ID inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ID inválido."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Pokémon não encontrado"
+            "description": "Pokémon não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Pokémon não encontrado"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -161,7 +368,9 @@
         }
       },
       "delete": {
-        "tags": ["Pokemons"],
+        "tags": [
+          "Pokemons"
+        ],
         "summary": "Remove um Pokémon do catálogo",
         "description": "Exclui permanentemente um Pokémon do registro local.",
         "parameters": [
@@ -180,10 +389,36 @@
             "description": "Pokémon excluído com sucesso (sem conteúdo)"
           },
           "400": {
-            "description": "ID inválido"
+            "description": "ID inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "ID inválido."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Pokémon não encontrado"
+            "description": "Pokémon não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Pokémon não encontrado"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -213,14 +448,6 @@
           "weight": {
             "type": "number",
             "example": 6
-          },
-          "createdAt": {
-            "type": "string",
-            "example": "2024-01-01T00:00:00.000Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "example": "2024-01-01T00:00:00.000Z"
           }
         }
       },
