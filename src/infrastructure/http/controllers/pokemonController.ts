@@ -35,22 +35,11 @@ export class PokemonController {
 
     const pokemon = await this.getPokemonByIdUseCase.execute(id);
 
-    if (!pokemon) {
-      res.status(404).json({ message: 'Pokémon não encontrado.' });
-      return;
-    }
-
     res.status(200).json(pokemon);
   }
 
   async create(req: Request, res: Response): Promise<void> {
     const { name, type, height, weight } = req.body;
-
-    //Verificação de parâmetros obrigatórios para a criação do Pokémon
-    if (!name || !type || height === undefined || weight === undefined) {
-      res.status(400).json({ message: 'Campos obrigatórios ausentes.' });
-      return;
-    }
 
     const pokemon = await this.createPokemonUseCase.execute({
       name,
@@ -76,11 +65,6 @@ export class PokemonController {
       req.body,
     );
 
-    if (!updatedPokemon) {
-      res.status(404).json({ message: 'Pokémon não encontrado' });
-      return;
-    }
-
     res.status(200).json(updatedPokemon);
   }
 
@@ -93,12 +77,7 @@ export class PokemonController {
       return;
     }
 
-    const isDeleted = await this.deletePokemonUseCase.execute(id);
-
-    if (!isDeleted) {
-      res.status(404).json({ message: 'Pokémon não encontrado' });
-      return;
-    }
+    await this.deletePokemonUseCase.execute(id);
 
     res.status(204).send();
   }

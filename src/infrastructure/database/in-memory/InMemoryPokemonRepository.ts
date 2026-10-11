@@ -34,6 +34,16 @@ export class InMemoryPokemonRepository implements IPokemonRepository {
     return null;
   }
 
+  async findByName(name: string): Promise<Pokemon | null> {
+    for (const pokemon of this.pokemons) {
+      if (pokemon.name.toLowerCase().trim() === name.toLowerCase().trim()) {
+        return pokemon;
+      }
+    }
+
+    return null;
+  }
+
   async create(data: Omit<Pokemon, 'id'>): Promise<Pokemon> {
     const newPokemon: Pokemon = {
       id: String(Date.now()),
