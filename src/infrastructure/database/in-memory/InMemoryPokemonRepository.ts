@@ -6,7 +6,7 @@ export class InMemoryPokemonRepository implements IPokemonRepository {
 
   async findAll(type?: string): Promise<Pokemon[]> {
     if (type) {
-      const searchType = type.toLowerCase();
+      const searchType = type.trim().toLowerCase();
       const filteredPokemons: Pokemon[] = [];
 
       for (const pokemon of this.pokemons) {

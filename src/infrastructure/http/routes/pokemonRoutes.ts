@@ -28,7 +28,11 @@ pokemonRoutes.get('/pokemons', (req, res) => {
               properties: {
                 id: { type: 'string', example: '1' },
                 name: { type: 'string', example: 'Pikachu' },
-                type: { type: 'string', example: 'electric' },
+                type: {
+                  type: 'array',
+                  items: { type: 'string' },
+                  example: ['electric']
+                },
                 height: { type: 'number', example: 4 },
                 weight: { type: 'number', example: 60 }
               }
@@ -63,7 +67,11 @@ pokemonRoutes.get('/pokemons/:id', (req, res) => {
             properties: {
               id: { type: 'string', example: '1' },
               name: { type: 'string', example: 'Pikachu' },
-              type: { type: 'string', example: 'electric' },
+              type: {
+                type: 'array',
+                items: { type: 'string' },
+                example: ['electric']
+              },
               height: { type: 'number', example: 4 },
               weight: { type: 'number', example: 60 }
             }
@@ -116,7 +124,11 @@ pokemonRoutes.post('/pokemons', (req, res) => {
             type: 'object',
             properties: {
               name: { type: 'string', example: 'Pikachu' },
-              type: { type: 'string', example: 'electric' },
+              type: {
+                type: 'array',
+                items: { type: 'string' },
+                example: ['electric']
+              },
               height: { type: 'number', example: 4 },
               weight: { type: 'number', example: 60 }
             },
@@ -134,7 +146,11 @@ pokemonRoutes.post('/pokemons', (req, res) => {
             properties: {
               id: { type: 'string', example: '1' },
               name: { type: 'string', example: 'Pikachu' },
-              type: { type: 'string', example: 'electric' },
+              type: {
+                type: 'array',
+                items: { type: 'string' },
+                example: ['electric']
+              },
               height: { type: 'number', example: 4 },
               weight: { type: 'number', example: 60 }
             }
@@ -179,7 +195,11 @@ pokemonRoutes.put('/pokemons/:id', (req, res) => {
                     type: 'object',
                     properties: {
                         name: { type: 'string', example: 'Raichu' },
-                        type: { type: 'string', example: 'electric' },
+                        type: {
+                          type: 'array',
+                          items: { type: 'string' },
+                          example: ['electric']
+                        },
                         height: { type: 'number', example: 8 },
                         weight: { type: 'number', example: 300 }
                     }
@@ -196,7 +216,11 @@ pokemonRoutes.put('/pokemons/:id', (req, res) => {
             properties: {
               id: { type: 'string', example: '1' },
               name: { type: 'string', example: 'Raichu' },
-              type: { type: 'string', example: 'electric' },
+              type: {
+                type: 'array',
+                items: { type: 'string' },
+                example: ['electric']
+              },
               height: { type: 'number', example: 8 },
               weight: { type: 'number', example: 300 }
             }

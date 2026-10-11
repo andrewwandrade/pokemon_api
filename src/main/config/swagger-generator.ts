@@ -9,7 +9,7 @@ const doc = {
       'API desenvolvida para a disciplina Tópicos Especiais em Engenharia de Software (UFF)',
   },
   host: 'localhost:3000',
-  basePath: '/',
+  basePath: '/api/v1',
   schemes: ['http'],
   consumes: ['application/json'],
   produces: ['application/json'],

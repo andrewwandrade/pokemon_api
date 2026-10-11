@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/"
+      "url": "http://localhost:3000/api/v1"
     }
   ],
   "tags": [
@@ -55,8 +55,13 @@
                         "example": "Pikachu"
                       },
                       "type": {
-                        "type": "string",
-                        "example": "electric"
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "example": [
+                          "electric"
+                        ]
                       },
                       "height": {
                         "type": "number",
@@ -98,8 +103,13 @@
                       "example": "Pikachu"
                     },
                     "type": {
-                      "type": "string",
-                      "example": "electric"
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "electric"
+                      ]
                     },
                     "height": {
                       "type": "number",
@@ -143,8 +153,13 @@
                     "example": "Pikachu"
                   },
                   "type": {
-                    "type": "string",
-                    "example": "electric"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "electric"
+                    ]
                   },
                   "height": {
                     "type": "number",
@@ -204,8 +219,13 @@
                       "example": "Pikachu"
                     },
                     "type": {
-                      "type": "string",
-                      "example": "electric"
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "electric"
+                      ]
                     },
                     "height": {
                       "type": "number",
@@ -289,8 +309,13 @@
                       "example": "Raichu"
                     },
                     "type": {
-                      "type": "string",
-                      "example": "electric"
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "electric"
+                      ]
                     },
                     "height": {
                       "type": "number",
@@ -350,8 +375,13 @@
                     "example": "Raichu"
                   },
                   "type": {
-                    "type": "string",
-                    "example": "electric"
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "electric"
+                    ]
                   },
                   "height": {
                     "type": "number",
