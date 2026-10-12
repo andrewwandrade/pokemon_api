@@ -1,6 +1,6 @@
-import { PokemonController } from '@infrastructure/http/controllers/pokemonController';
 import { prisma } from '@infrastructure/database/prisma/client'
 import { PrismaPokemonRepository } from '@infrastructure/database/prisma/prisma-pokemon-repository';
+import { PokemonController } from '@infrastructure/http/controllers/pokemonController';
 import { CreatePokemonUseCase } from '@application/use-cases/createPokemon';
 import { DeletePokemonUseCase } from '@application/use-cases/deletePokemon';
 import { GetPokemonByIdUseCase } from '@application/use-cases/getPokemonById';

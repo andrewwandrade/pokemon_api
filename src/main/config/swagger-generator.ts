@@ -18,6 +18,10 @@ const doc = {
       name: 'Pokemons',
       description: 'Criar, editar, atualizar e listar Pokémons',
     },
+    {
+      name: 'Trainers',
+      description: 'Cadastro de treinadores e consulta do time ativo',
+    },
   ],
   components: {
     schemas: {
@@ -42,6 +46,7 @@ const outputFile = path.resolve(__dirname, 'swagger-output.json');
 
 const endpointsFiles = [
   path.resolve(__dirname, '../../infrastructure/http/routes/pokemonRoutes.ts'),
+  path.resolve(__dirname, '../../infrastructure/http/routes/trainerRoutes.ts'),
 ];
 
 swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc);
