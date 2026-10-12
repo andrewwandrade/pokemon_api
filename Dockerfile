@@ -14,11 +14,13 @@ RUN npm ci
 # Copia o código-fonte e configurações
 COPY . .
 
+RUN DATABASE_URL="postgresql://user:pass@localhost:5432/db" npx prisma generate
+
 # Gera os arquivos compilados em JavaScript na pasta /dist
 RUN npm run build
 
 # Copia o swagger-output.json para a pasta /dist
-COPY swagger-output.json ./dist/swagger-output.json
+RUN cp src/main/config/swagger-output.json dist/src/main/config/swagger-output.json
 
 # ==========================================
 # Estágio 2: Runner (Ambiente de Execução)
@@ -35,11 +37,15 @@ COPY package*.json ./
 # Instala APENAS as dependências de produção para reduzir o tamanho da imagem
 RUN npm ci --only=production
 
-# Copia a pasta /dist gerada no estágio de build
+# Prisma: schema/migrations e o client gerado
+COPY --from=builder /usr/src/app/prisma ./prisma
+COPY --from=builder /usr/src/app/node_modules/.prisma ./node_modules/.prisma
+
+# Código compilado + swagger (caminho correto)
 COPY --from=builder /usr/src/app/dist ./dist
 
 # Expõe a porta onde o Express escuta
-EXPOSE 3333
+EXPOSE 3000
 
 # Comando para subir o servidor em produção
 CMD ["node", "dist/main/server.js"]

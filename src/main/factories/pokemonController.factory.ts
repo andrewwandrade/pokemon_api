@@ -1,5 +1,6 @@
 import { PokemonController } from '@infrastructure/http/controllers/pokemonController';
-import { InMemoryPokemonRepository } from '@infrastructure/database/in-memory/InMemoryPokemonRepository';
+import { prisma } from '@infrastructure/database/prisma/client'
+import { PrismaPokemonRepository } from '@infrastructure/database/prisma/prisma-pokemon-repository';
 import { CreatePokemonUseCase } from '@application/use-cases/createPokemon';
 import { DeletePokemonUseCase } from '@application/use-cases/deletePokemon';
 import { GetPokemonByIdUseCase } from '@application/use-cases/getPokemonById';
@@ -7,8 +8,8 @@ import { ListPokemonsUseCase } from '@application/use-cases/listPokemons';
 import { UpdatePokemonUseCase } from '@application/use-cases/updatePokemon';
 
 export function makePokemonController(): PokemonController {
-  //Instância do repositório em memória
-  const pokemonRepository = new InMemoryPokemonRepository();
+  //Instância do repositório Prisma
+  const pokemonRepository = new PrismaPokemonRepository(prisma);
 
   //Instâncias de caso de uso
   const createPokemonUseCase = new CreatePokemonUseCase(pokemonRepository);
