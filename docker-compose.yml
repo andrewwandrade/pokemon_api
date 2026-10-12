@@ -1,0 +1,24 @@
+
+version: '3.8'
+
+services:
+  # Serviço 1: A Nossa Manager API (Node.js + TS)
+  api:
+
+  # Serviço 2: Banco de Dados PostgreSQL
+  postgres:
+
+  # Serviço 3: Interface de Gerenciamento pgAdmin 4
+  pgadmin:
+
+# Declarando a persistência de dados para o Banco e pgAdmin
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+# Rede interna privada para comunicação entre os containers
+networks:
+  manager_network:
+    driver: bridge
