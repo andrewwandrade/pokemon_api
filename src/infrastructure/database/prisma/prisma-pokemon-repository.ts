@@ -28,7 +28,7 @@ export class PrismaPokemonRepository implements IPokemonRepository {
     const row = await this.prisma.pokemon.create({
       data: {
         name: data.name,
-        types: data.type, 
+        types: data.type,
         height: data.height,
         weight: data.weight,
       },

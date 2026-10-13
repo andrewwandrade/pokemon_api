@@ -8,9 +8,16 @@ export class CreatePokemonUseCase {
   constructor(private readonly pokemonRepository: IPokemonRepository) {}
 
   async execute(data: CreatePokemonDTO): Promise<Pokemon> {
-    const pokemonAlreadyExists = await this.pokemonRepository.findByName(data.name);
+    const pokemonAlreadyExists = await this.pokemonRepository.findByName(
+      data.name,
+    );
 
-    if (!data.name || !data.type || data.height === undefined || data.weight === undefined) {
+    if (
+      !data.name ||
+      !data.type ||
+      data.height === undefined ||
+      data.weight === undefined
+    ) {
       throw new AppError('Campos obrigatórios ausentes.', 400);
     }
 

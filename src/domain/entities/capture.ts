@@ -6,12 +6,12 @@ export interface PokemonStat {
 export interface Capture {
   id: string;
   trainerId: string;
-  pokedexId: number;      
+  pokedexId: number;
   name: string;
   imageUrl: string | null;
   types: string[];
-  stats: PokemonStat[];     
-  isActive: boolean;        
+  stats: PokemonStat[];
+  isActive: boolean;
   capturedAt: Date;
 }
 

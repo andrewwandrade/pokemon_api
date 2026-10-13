@@ -13,7 +13,8 @@ export const pokemonParamsSchema = z.object({
 // POST /pokemons — cadastro
 export const createPokemonSchema = z.object({
   name: z.string().trim().min(1, 'O nome é obrigatório'),
-  type: z.array(z.string().trim().min(1))
+  type: z
+    .array(z.string().trim().min(1))
     .min(1, 'Informe pelo menos um tipo')
     .max(2, 'Um Pokémon pode ter no máximo dois tipos'),
   height: z.number().int().positive('A altura deve ser positiva'),
@@ -25,5 +26,5 @@ export const updatePokemonSchema = createPokemonSchema
   .partial()
   .refine(
     (data) => Object.keys(data).length > 0,
-    'Informe pelo menos um campo para atualizar'
+    'Informe pelo menos um campo para atualizar',
   );

@@ -8,7 +8,8 @@ export class CreateTrainerUseCase {
 
   async execute(data: CreateTrainerDTO): Promise<Trainer> {
     const exists = await this.trainers.findByEmail(data.email);
-    if (exists) throw new ConflictError('Já existe um treinador com esse e-mail');
+    if (exists)
+      throw new ConflictError('Já existe um treinador com esse e-mail');
     return this.trainers.create(data);
   }
 }

@@ -1,6 +1,10 @@
 import { Prisma, PrismaClient, Capture as CaptureRow } from '@prisma/client';
 import { ICaptureRepository } from '@domain/repositories/ICaptureRepository';
-import { Capture, CreateCaptureData, PokemonStat } from '@domain/entities/capture';
+import {
+  Capture,
+  CreateCaptureData,
+  PokemonStat,
+} from '@domain/entities/capture';
 
 export class PrismaCaptureRepository implements ICaptureRepository {
   constructor(private readonly prisma: PrismaClient) {}

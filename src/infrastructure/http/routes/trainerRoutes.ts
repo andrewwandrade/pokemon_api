@@ -10,8 +10,11 @@ const trainerRoutes = Router();
 const trainerController = makeTrainerController();
 const captureController = makeCaptureController();
 
-trainerRoutes.post('/trainers', validateRequest({ body: createTrainerSchema }), (req, res) => {
-  /*
+trainerRoutes.post(
+  '/trainers',
+  validateRequest({ body: createTrainerSchema }),
+  (req, res) => {
+    /*
     #swagger.tags = ['Trainers']
     #swagger.summary = 'Cadastra um novo treinador'
     #swagger.description = 'Cria um treinador. O e-mail deve ser único.'
@@ -75,11 +78,12 @@ trainerRoutes.post('/trainers', validateRequest({ body: createTrainerSchema }), 
     }
     */
 
-  return trainerController.create(req, res);
-});
+    return trainerController.create(req, res);
+  },
+);
 
-trainerRoutes.get('/trainers', (req, res) => { 
-    /* 
+trainerRoutes.get('/trainers', (req, res) => {
+  /* 
       #swagger.tags = ['Trainers'] 
       #swagger.summary = 'Lista todos os treinadores' 
       #swagger.description = 'Retorna todos os treinadores cadastrados.' 
@@ -116,13 +120,15 @@ trainerRoutes.get('/trainers', (req, res) => {
         } 
       } 
     } 
-  */ 
-  return trainerController.list(req, res); 
-
+  */
+  return trainerController.list(req, res);
 });
 
-trainerRoutes.get('/trainers/:trainerId/team', validateRequest({params: trainerParamsSchema}), (req, res) => {
-  /*
+trainerRoutes.get(
+  '/trainers/:trainerId/team',
+  validateRequest({ params: trainerParamsSchema }),
+  (req, res) => {
+    /*
     #swagger.tags = ['Trainers']
     #swagger.summary = 'Lista o time ativo do treinador'
     #swagger.description = 'Retorna os Pokémons capturados que estão no time ativo (máximo de 6).'
@@ -186,14 +192,15 @@ trainerRoutes.get('/trainers/:trainerId/team', validateRequest({params: trainerP
     }
     */
 
-  return trainerController.team(req, res);
-});
+    return trainerController.team(req, res);
+  },
+);
 
 trainerRoutes.post(
-  '/trainers/:trainerId/captures', 
-  validateRequest({params: trainerParamsSchema, body: capturePokemonSchema}),
+  '/trainers/:trainerId/captures',
+  validateRequest({ params: trainerParamsSchema, body: capturePokemonSchema }),
   (req, res) => {
-  /*
+    /*
     #swagger.tags = ['Trainers']
     #swagger.summary = 'Captura um Pokémon para o treinador'
     #swagger.description = 'Consulta a PokéAPI, valida o limite de 6 Pokémons no time ativo e salva a captura.'
@@ -303,7 +310,8 @@ trainerRoutes.post(
     }
     */
 
-  return captureController.create(req, res);
-});
+    return captureController.create(req, res);
+  },
+);
 
 export { trainerRoutes };

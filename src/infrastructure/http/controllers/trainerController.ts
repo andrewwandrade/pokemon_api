@@ -22,8 +22,8 @@ export class TrainerController {
     return res.status(200).json(team);
   };
 
-    list = async (_req: Request, res: Response) => { 
-      const trainers = await this.listTrainers.execute(); 
-      return res.status(200).json(trainers); 
-    };
+  list = async (_req: Request, res: Response) => {
+    const trainers = await this.listTrainers.execute();
+    return res.status(200).json(trainers);
+  };
 }

@@ -13,7 +13,10 @@ export class CapturePokemonUseCase {
     private readonly pokeApi: IPokeApiGateway,
   ) {}
 
-  async execute({ trainerId, pokemonName }: CapturePokemonDTO): Promise<Capture> {
+  async execute({
+    trainerId,
+    pokemonName,
+  }: CapturePokemonDTO): Promise<Capture> {
     //Treinador existe?
     const trainer = await this.trainers.findById(trainerId);
     if (!trainer) throw new NotFoundError('Treinador');

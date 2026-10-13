@@ -1,4 +1,7 @@
-import { IPokeApiGateway, PokeApiPokemon } from '@domain/repositories/IPokeAPIGateway';
+import {
+  IPokeApiGateway,
+  PokeApiPokemon,
+} from '@domain/repositories/IPokeAPIGateway';
 import { NotFoundError } from '@domain/errors/not-found-error';
 
 export class SearchPokedexUseCase {

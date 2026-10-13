@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { z , ZodError } from 'zod';
+import { z, ZodError } from 'zod';
 import { ValidationError } from '@domain/errors/validation-error';
 
 interface RequestValidationSchemas {
@@ -12,7 +12,7 @@ export const validateRequest = (schemas: RequestValidationSchemas) => {
   return async (
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<void> => {
     try {
       const validated: Record<string, unknown> = {};

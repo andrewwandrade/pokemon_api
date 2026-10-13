@@ -1,13 +1,21 @@
 import { Router } from 'express';
 import { makePokemonController } from '@main/factories/pokemonController.factory';
-import { listPokemonsSchema, pokemonParamsSchema, createPokemonSchema, updatePokemonSchema } from '@infrastructure/http/schemas/pokemonSchema';
+import {
+  listPokemonsSchema,
+  pokemonParamsSchema,
+  createPokemonSchema,
+  updatePokemonSchema,
+} from '@infrastructure/http/schemas/pokemonSchema';
 import { validateRequest } from '@infrastructure/http/middlewares/validateRequest';
 
 const pokemonRoutes = Router();
 const pokemonController = makePokemonController();
 
-pokemonRoutes.get('/pokemons', validateRequest({ query: listPokemonsSchema }), (req, res) => {
-  /*
+pokemonRoutes.get(
+  '/pokemons',
+  validateRequest({ query: listPokemonsSchema }),
+  (req, res) => {
+    /*
     #swagger.tags = ['Pokemons']
     #swagger.summary = 'Lista todos os pokémons'
     #swagger.description = 'Retorna uma lista de pokémons cadastrados.'
@@ -44,11 +52,15 @@ pokemonRoutes.get('/pokemons', validateRequest({ query: listPokemonsSchema }), (
       }
     }
     */
-  return pokemonController.list(req, res);
-});
+    return pokemonController.list(req, res);
+  },
+);
 
-pokemonRoutes.get('/pokemons/:id', validateRequest({ params: pokemonParamsSchema }), (req, res) => {
-  /*
+pokemonRoutes.get(
+  '/pokemons/:id',
+  validateRequest({ params: pokemonParamsSchema }),
+  (req, res) => {
+    /*
     #swagger.tags = ['Pokemons']
     #swagger.summary = 'Busca um pokémon pelo ID'
     #swagger.description = 'Retorna os dados de um único pokémon a partir do seu ID.'
@@ -109,11 +121,15 @@ pokemonRoutes.get('/pokemons/:id', validateRequest({ params: pokemonParamsSchema
     }
     */
 
-  return pokemonController.getById(req, res);
-});
+    return pokemonController.getById(req, res);
+  },
+);
 
-pokemonRoutes.post('/pokemons', validateRequest({ body: createPokemonSchema }), (req, res) => {
-  /*
+pokemonRoutes.post(
+  '/pokemons',
+  validateRequest({ body: createPokemonSchema }),
+  (req, res) => {
+    /*
     #swagger.tags = ['Pokemons']
     #swagger.summary = 'Cria um novo pokémon'
     #swagger.description = 'Cadastra um novo pokémon com os dados informados no corpo da requisição.'
@@ -175,13 +191,15 @@ pokemonRoutes.post('/pokemons', validateRequest({ body: createPokemonSchema }), 
     }
     */
 
-  return pokemonController.create(req, res);
-});
+    return pokemonController.create(req, res);
+  },
+);
 
-pokemonRoutes.put('/pokemons/:id', 
-  validateRequest({ params: pokemonParamsSchema, body: updatePokemonSchema, }), 
+pokemonRoutes.put(
+  '/pokemons/:id',
+  validateRequest({ params: pokemonParamsSchema, body: updatePokemonSchema }),
   (req, res) => {
-  /* 
+    /* 
     #swagger.tags = ['Pokemons']
     #swagger.summary = 'Atualiza dados de um Pokémon'
     #swagger.description = 'Altera as informações de um Pokémon existente pelo seu ID.'
@@ -260,11 +278,15 @@ pokemonRoutes.put('/pokemons/:id',
     }
     */
 
-  return pokemonController.update(req, res);
-});
+    return pokemonController.update(req, res);
+  },
+);
 
-pokemonRoutes.delete('/pokemons/:id', validateRequest({ params: pokemonParamsSchema }), (req, res) => {
-  /* 
+pokemonRoutes.delete(
+  '/pokemons/:id',
+  validateRequest({ params: pokemonParamsSchema }),
+  (req, res) => {
+    /* 
       #swagger.tags = ['Pokemons']
       #swagger.summary = 'Remove um Pokémon do catálogo'
       #swagger.description = 'Exclui permanentemente um Pokémon do registro local.'
@@ -303,7 +325,8 @@ pokemonRoutes.delete('/pokemons/:id', validateRequest({ params: pokemonParamsSch
       }
     */
 
-  return pokemonController.delete(req, res);
-});
+    return pokemonController.delete(req, res);
+  },
+);
 
 export { pokemonRoutes };

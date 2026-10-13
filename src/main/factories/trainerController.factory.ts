@@ -12,11 +12,10 @@ export function makeTrainerController(): TrainerController {
 
   const createTrainer = new CreateTrainerUseCase(trainerRepository);
   const listTrainer = new listTrainersUseCase(trainerRepository);
-  const getTrainerTeam = new GetTrainerTeamUseCase(trainerRepository, captureRepository);
-
-  return new TrainerController(
-    createTrainer, 
-    getTrainerTeam,
-    listTrainer,
+  const getTrainerTeam = new GetTrainerTeamUseCase(
+    trainerRepository,
+    captureRepository,
   );
+
+  return new TrainerController(createTrainer, getTrainerTeam, listTrainer);
 }

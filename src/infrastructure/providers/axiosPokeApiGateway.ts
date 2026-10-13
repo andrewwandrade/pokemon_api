@@ -1,5 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
-import { IPokeApiGateway, PokeApiPokemon } from '@domain/repositories/IPokeAPIGateway';
+import {
+  IPokeApiGateway,
+  PokeApiPokemon,
+} from '@domain/repositories/IPokeAPIGateway';
 import { ExternalServiceError } from '@domain/errors/external-service-error';
 
 interface PokeApiResponse {
@@ -18,7 +21,10 @@ interface PokeApiResponse {
 export class AxiosPokeApiGateway implements IPokeApiGateway {
   private readonly http: AxiosInstance;
 
-  constructor(baseURL: string = process.env.POKEAPI_BASE_URL ?? 'https://pokeapi.co/api/v2') {
+  constructor(
+    baseURL: string = process.env.POKEAPI_BASE_URL ??
+      'https://pokeapi.co/api/v2',
+  ) {
     this.http = axios.create({ baseURL, timeout: 5000 });
   }
 

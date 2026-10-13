@@ -1,13 +1,16 @@
 import { Router } from 'express';
 import { makePokedexController } from '@main/factories/pokedexController.factory';
 import { validateRequest } from '@infrastructure/http/middlewares/validateRequest';
-import { searchPokemonSchema } from '@infrastructure/http/schemas/pokedexSchema'
+import { searchPokemonSchema } from '@infrastructure/http/schemas/pokedexSchema';
 
 const pokedexRoutes = Router();
 const controller = makePokedexController();
 
-pokedexRoutes.get('/pokedex/search', validateRequest({query: searchPokemonSchema}), (req, res) => {
-  /*
+pokedexRoutes.get(
+  '/pokedex/search',
+  validateRequest({ query: searchPokemonSchema }),
+  (req, res) => {
+    /*
     #swagger.tags = ['Pokédex']
     #swagger.summary = 'Busca um Pokémon na PokéAPI oficial'
     #swagger.description = 'Consulta diretamente a PokéAPI e retorna os dados formatados (imagem, tipos e atributos base).'
@@ -86,7 +89,8 @@ pokedexRoutes.get('/pokedex/search', validateRequest({query: searchPokemonSchema
     }
     */
 
-  return controller.search(req, res);
-});
+    return controller.search(req, res);
+  },
+);
 
 export { pokedexRoutes };

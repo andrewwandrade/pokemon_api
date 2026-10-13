@@ -11,10 +11,17 @@ export function mapPrismaError(error: unknown): AppError | null {
       case 'P2025':
         return new NotFoundError('Registro');
       case 'P2003':
-        return new AppError('Referência inválida (chave estrangeira)', 400, 'FK_VIOLATION');
+        return new AppError(
+          'Referência inválida (chave estrangeira)',
+          400,
+          'FK_VIOLATION',
+        );
     }
   }
-  if (error instanceof Prisma.PrismaClientInitializationError || error instanceof Prisma.PrismaClientRustPanicError) {
+  if (
+    error instanceof Prisma.PrismaClientInitializationError ||
+    error instanceof Prisma.PrismaClientRustPanicError
+  ) {
     return new AppError('Banco de dados indisponível', 503, 'DB_UNAVAILABLE');
   }
   return null;

@@ -50,4 +50,9 @@ const endpointsFiles = [
   path.resolve(__dirname, '../../infrastructure/http/routes/pokedexRoutes.ts'),
 ];
 
-swaggerAutogen({ openapi: '3.0.0', autoQuery: false, autoBody: false, autoHeaders: false})(outputFile, endpointsFiles, doc);
+swaggerAutogen({
+  openapi: '3.0.0',
+  autoQuery: false,
+  autoBody: false,
+  autoHeaders: false,
+})(outputFile, endpointsFiles, doc);

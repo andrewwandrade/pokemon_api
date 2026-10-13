@@ -5,14 +5,13 @@ export class CaptureController {
   constructor(private readonly capturePokemon: CapturePokemonUseCase) {}
 
   create = async (_req: Request, res: Response) => {
-
     const { trainerId } = res.locals.validated.params;
     const { pokemonName } = res.locals.validated.body;
-    
-    if (typeof trainerId !== 'string') { 
-      return res.status(400).json({ 
-        error: 'ID do treinador inválido.', 
-      }); 
+
+    if (typeof trainerId !== 'string') {
+      return res.status(400).json({
+        error: 'ID do treinador inválido.',
+      });
     }
 
     const capture = await this.capturePokemon.execute({
