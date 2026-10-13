@@ -17,19 +17,12 @@ export class TrainerController {
   };
 
   team = async (_req: Request, res: Response) => {
-    const rawType = res.locals.validated.params;
-    const type = typeof rawType === 'string' ? rawType : undefined;
-
-    if (!type) {
-      res.status(400).json({ message: 'ID do treinador inválido.' });
-      return;
-    }
-    
-    const team = await this.getTrainerTeam.execute(type);
+    const { trainerId } = res.locals.validated.params;
+    const team = await this.getTrainerTeam.execute(trainerId);
     return res.status(200).json(team);
   };
 
-    list = async (req: Request, res: Response) => { 
+    list = async (_req: Request, res: Response) => { 
       const trainers = await this.listTrainers.execute(); 
       return res.status(200).json(trainers); 
     };

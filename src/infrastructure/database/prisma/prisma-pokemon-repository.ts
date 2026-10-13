@@ -1,4 +1,4 @@
-import { PrismaClient, Pokemon as PokemonRow } from '@prisma/client';
+import { Prisma, PrismaClient, Pokemon as PokemonRow } from '@prisma/client';
 import { IPokemonRepository } from '@domain/repositories/IPokemonRepository';
 import { Pokemon } from '@domain/entities/pokemon';
 
@@ -47,18 +47,34 @@ export class PrismaPokemonRepository implements IPokemonRepository {
           weight: data.weight,
         },
       });
+
       return this.toDomain(row);
-    } catch {
-      return null;
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        return null;
+      }
+
+      throw error;
     }
   }
 
   async delete(id: string): Promise<boolean> {
     try {
       await this.prisma.pokemon.delete({ where: { id } });
+
       return true;
-    } catch {
-      return false;
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        return false;
+      }
+
+      throw error;
     }
   }
 

@@ -6,7 +6,8 @@ export class CaptureController {
 
   create = async (_req: Request, res: Response) => {
 
-    const { trainerId } = res.locals.validated.params; 
+    const { trainerId } = res.locals.validated.params;
+    const { pokemonName } = res.locals.validated.body;
     
     if (typeof trainerId !== 'string') { 
       return res.status(400).json({ 
@@ -16,7 +17,7 @@ export class CaptureController {
 
     const capture = await this.capturePokemon.execute({
       trainerId,
-      pokemonName: res.locals.validated.body,
+      pokemonName: pokemonName,
     });
     return res.status(201).json(capture);
   };

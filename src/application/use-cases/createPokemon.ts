@@ -2,6 +2,7 @@ import { Pokemon } from '@domain/entities/pokemon';
 import { IPokemonRepository } from '@domain/repositories/IPokemonRepository';
 import { CreatePokemonDTO } from '@application/dtos/createPokemonDTO';
 import { AppError } from '@domain/errors/app-error';
+import { ConflictError } from '@domain/errors/conflict-error';
 
 export class CreatePokemonUseCase {
   constructor(private readonly pokemonRepository: IPokemonRepository) {}
@@ -14,7 +15,7 @@ export class CreatePokemonUseCase {
     }
 
     if (pokemonAlreadyExists) {
-      throw new AppError('Pokémon com este nome já está cadastrado.', 409);
+      throw new ConflictError('Já existe um Pokémon com esse nome');
     }
 
     return this.pokemonRepository.create(data);
