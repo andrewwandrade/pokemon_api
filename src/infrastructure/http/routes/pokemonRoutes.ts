@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { makePokemonController } from '@main/factories/pokemonController.factory';
+import { listPokemonsSchema, pokemonParamsSchema, createPokemonSchema, updatePokemonSchema } from '@infrastructure/http/schemas/pokemonSchema';
+import { validateRequest } from '@infrastructure/http/middlewares/validateRequest';
 
 const pokemonRoutes = Router();
 const pokemonController = makePokemonController();
 
-pokemonRoutes.get('/pokemons', (req, res) => {
+pokemonRoutes.get('/pokemons', validateRequest({ query: listPokemonsSchema }), (req, res) => {
   /*
     #swagger.tags = ['Pokemons']
     #swagger.summary = 'Lista todos os pokémons'
@@ -45,7 +47,7 @@ pokemonRoutes.get('/pokemons', (req, res) => {
   return pokemonController.list(req, res);
 });
 
-pokemonRoutes.get('/pokemons/:id', (req, res) => {
+pokemonRoutes.get('/pokemons/:id', validateRequest({ params: pokemonParamsSchema }), (req, res) => {
   /*
     #swagger.tags = ['Pokemons']
     #swagger.summary = 'Busca um pokémon pelo ID'
@@ -110,7 +112,7 @@ pokemonRoutes.get('/pokemons/:id', (req, res) => {
   return pokemonController.getById(req, res);
 });
 
-pokemonRoutes.post('/pokemons', (req, res) => {
+pokemonRoutes.post('/pokemons', validateRequest({ body: createPokemonSchema }), (req, res) => {
   /*
     #swagger.tags = ['Pokemons']
     #swagger.summary = 'Cria um novo pokémon'
@@ -176,7 +178,9 @@ pokemonRoutes.post('/pokemons', (req, res) => {
   return pokemonController.create(req, res);
 });
 
-pokemonRoutes.put('/pokemons/:id', (req, res) => {
+pokemonRoutes.put('/pokemons/:id', 
+  validateRequest({ params: pokemonParamsSchema, body: updatePokemonSchema, }), 
+  (req, res) => {
   /* 
     #swagger.tags = ['Pokemons']
     #swagger.summary = 'Atualiza dados de um Pokémon'
@@ -259,7 +263,7 @@ pokemonRoutes.put('/pokemons/:id', (req, res) => {
   return pokemonController.update(req, res);
 });
 
-pokemonRoutes.delete('/pokemons/:id', (req, res) => {
+pokemonRoutes.delete('/pokemons/:id', validateRequest({ params: pokemonParamsSchema }), (req, res) => {
   /* 
       #swagger.tags = ['Pokemons']
       #swagger.summary = 'Remove um Pokémon do catálogo'

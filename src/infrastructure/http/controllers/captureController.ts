@@ -4,9 +4,9 @@ import { CapturePokemonUseCase } from '@application/use-cases/capturePokemon';
 export class CaptureController {
   constructor(private readonly capturePokemon: CapturePokemonUseCase) {}
 
-  create = async (req: Request, res: Response) => {
+  create = async (_req: Request, res: Response) => {
 
-    const { trainerId } = req.params; 
+    const { trainerId } = res.locals.validated.params; 
     
     if (typeof trainerId !== 'string') { 
       return res.status(400).json({ 
@@ -16,7 +16,7 @@ export class CaptureController {
 
     const capture = await this.capturePokemon.execute({
       trainerId,
-      pokemonName: req.body.pokemonName,
+      pokemonName: res.locals.validated.body,
     });
     return res.status(201).json(capture);
   };

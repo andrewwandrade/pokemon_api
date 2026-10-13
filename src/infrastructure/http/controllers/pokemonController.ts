@@ -14,71 +14,46 @@ export class PokemonController {
     private readonly updatePokemonUseCase: UpdatePokemonUseCase,
   ) {}
 
-  async list(req: Request, res: Response): Promise<void> {
-    const rawType = req.query.type;
+  async list(_req: Request, res: Response): Promise<void> { 
+    const { type } = res.locals.validated.query; 
+    const pokemons = await this.listPokemonsUseCase.execute(type); 
 
-    //Garante que é uma string. Caso contrário, define como undefined.
-    const type = typeof rawType === 'string' ? rawType : undefined;
-    const pokemons = await this.listPokemonsUseCase.execute(type);
-
-    res.status(200).json(pokemons);
+    res.status(200).json(pokemons); 
   }
 
-  async getById(req: Request, res: Response): Promise<void> {
-    const rawId = req.params.id;
-    const id = typeof rawId === 'string' ? rawId : undefined;
+  async getById(_req: Request, res: Response): Promise<void> { 
+    const { id } = res.locals.validated.params; 
+    const pokemon = await this.getPokemonByIdUseCase.execute(id); 
 
-    if (!id) {
-      res.status(400).json({ message: 'ID inválido.' });
-      return;
-    }
-
-    const pokemon = await this.getPokemonByIdUseCase.execute(id);
-
-    res.status(200).json(pokemon);
+    res.status(200).json(pokemon); 
   }
 
-  async create(req: Request, res: Response): Promise<void> {
-    const { name, type, height, weight } = req.body;
+  async create(_req: Request, res: Response): Promise<void> { 
+    const { name, type, height, weight } = res.locals.validated.body; 
+    const pokemon = await this.createPokemonUseCase.execute({ 
+      name, 
+      type, 
+      height, 
+      weight, 
+    }); 
 
-    const pokemon = await this.createPokemonUseCase.execute({
-      name,
-      type,
-      height,
-      weight,
-    });
-
-    res.status(201).json(pokemon);
+    res.status(201).json(pokemon); 
   }
 
-  async update(req: Request, res: Response): Promise<void> {
-    const rawId = req.params.id;
-    const id = typeof rawId === 'string' ? rawId : undefined;
+  async update(_req: Request, res: Response): Promise<void> { 
+    const { id } = res.locals.validated.params; 
+    const pokemonData = res.locals.validated.body; 
+    const updatedPokemon = await this.updatePokemonUseCase.execute( 
+      id, 
+      pokemonData, 
+    ); 
 
-    if (!id) {
-      res.status(400).json({ message: 'ID inválido.' });
-      return;
-    }
-
-    const updatedPokemon = await this.updatePokemonUseCase.execute(
-      id,
-      req.body,
-    );
-
-    res.status(200).json(updatedPokemon);
+    res.status(200).json(updatedPokemon); 
   }
 
-  async delete(req: Request, res: Response): Promise<void> {
-    const rawId = req.params.id;
-    const id = typeof rawId === 'string' ? rawId : undefined;
-
-    if (!id) {
-      res.status(400).json({ message: 'ID inválido.' });
-      return;
-    }
-
-    await this.deletePokemonUseCase.execute(id);
-
-    res.status(204).send();
-  }
+  async delete(_req: Request, res: Response): Promise<void> { 
+    const { id } = res.locals.validated.params; 
+    await this.deletePokemonUseCase.execute(id); 
+    
+    res.status(204).send(); }
 }

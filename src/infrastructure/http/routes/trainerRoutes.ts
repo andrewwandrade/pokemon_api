@@ -1,12 +1,16 @@
 import { Router } from 'express';
 import { makeTrainerController } from '@main/factories/trainerController.factory';
 import { makeCaptureController } from '@main/factories/captureController.factory';
+import { validateRequest } from '@infrastructure/http/middlewares/validateRequest';
+import { createTrainerSchema } from '@infrastructure/http/schemas/trainerSchema';
+import { trainerParamsSchema } from '@infrastructure/http/schemas/trainerSchema';
+import { capturePokemonSchema } from '@infrastructure/http/schemas/captureSchema';
 
 const trainerRoutes = Router();
 const trainerController = makeTrainerController();
 const captureController = makeCaptureController();
 
-trainerRoutes.post('/trainers', (req, res) => {
+trainerRoutes.post('/trainers', validateRequest({ body: createTrainerSchema }), (req, res) => {
   /*
     #swagger.tags = ['Trainers']
     #swagger.summary = 'Cadastra um novo treinador'
@@ -117,7 +121,7 @@ trainerRoutes.get('/trainers', (req, res) => {
 
 });
 
-trainerRoutes.get('/trainers/:trainerId/team', (req, res) => {
+trainerRoutes.get('/trainers/:trainerId/team', validateRequest({params: trainerParamsSchema}), (req, res) => {
   /*
     #swagger.tags = ['Trainers']
     #swagger.summary = 'Lista o time ativo do treinador'
@@ -185,7 +189,10 @@ trainerRoutes.get('/trainers/:trainerId/team', (req, res) => {
   return trainerController.team(req, res);
 });
 
-trainerRoutes.post('/trainers/:trainerId/captures', (req, res) => {
+trainerRoutes.post(
+  '/trainers/:trainerId/captures', 
+  validateRequest({params: trainerParamsSchema, body: capturePokemonSchema}),
+  (req, res) => {
   /*
     #swagger.tags = ['Trainers']
     #swagger.summary = 'Captura um Pokémon para o treinador'

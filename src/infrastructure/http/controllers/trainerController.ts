@@ -10,14 +10,14 @@ export class TrainerController {
     private readonly listTrainers: listTrainersUseCase,
   ) {}
 
-  create = async (req: Request, res: Response) => {
-    const { name, email } = req.body;
+  create = async (_req: Request, res: Response) => {
+    const { name, email } = res.locals.validated.body;
     const trainer = await this.createTrainer.execute({ name, email });
     return res.status(201).json(trainer);
   };
 
-  team = async (req: Request, res: Response) => {
-    const rawType = req.params.trainerId;
+  team = async (_req: Request, res: Response) => {
+    const rawType = res.locals.validated.params;
     const type = typeof rawType === 'string' ? rawType : undefined;
 
     if (!type) {

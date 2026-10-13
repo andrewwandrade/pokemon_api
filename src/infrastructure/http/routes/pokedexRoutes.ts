@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { makePokedexController } from '@main/factories/pokedexController.factory';
+import { validateRequest } from '@infrastructure/http/middlewares/validateRequest';
+import { searchPokemonSchema } from '@infrastructure/http/schemas/pokedexSchema'
 
 const pokedexRoutes = Router();
 const controller = makePokedexController();
 
-pokedexRoutes.get('/pokedex/search', (req, res) => {
+pokedexRoutes.get('/pokedex/search', validateRequest({query: searchPokemonSchema}), (req, res) => {
   /*
     #swagger.tags = ['Pokédex']
     #swagger.summary = 'Busca um Pokémon na PokéAPI oficial'
