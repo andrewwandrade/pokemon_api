@@ -4,6 +4,7 @@ import swaggerDocument from './config/swagger-output.json';
 import { pokemonRoutes } from '../infrastructure/http/routes/pokemonRoutes';
 import { errorHandler } from '@infrastructure/http/middlewares/errorHandler';
 import { trainerRoutes } from '@infrastructure/http/routes/trainerRoutes';
+import { pokedexRoutes } from '@infrastructure/http/routes/pokedexRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,7 +12,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', pokemonRoutes);
-app.use('/api/v1/trainers', trainerRoutes);
+app.use('/api/v1', trainerRoutes);
+app.use('/api/v1', pokedexRoutes);
 
 app.use(errorHandler);
 

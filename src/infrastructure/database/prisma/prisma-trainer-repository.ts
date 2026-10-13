@@ -27,6 +27,12 @@ export class PrismaTrainerRepository implements ITrainerRepository {
     return row ? this.toDomain(row) : null;
   }
 
+  async findAll(): Promise<Trainer[]> {
+    const rows = await this.prisma.trainer.findMany();
+
+    return rows.map((row) => this.toDomain(row));
+  }
+
   private toDomain(row: TrainerRow): Trainer {
     return {
       id: row.id,

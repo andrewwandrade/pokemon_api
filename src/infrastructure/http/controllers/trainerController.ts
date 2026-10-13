@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import { CreateTrainerUseCase } from '@application/use-cases/createTrainer';
 import { GetTrainerTeamUseCase } from '@application/use-cases/getTrainerTeamUseCase';
+import { listTrainersUseCase } from '@application/use-cases/listTrainers';
 
 export class TrainerController {
   constructor(
     private readonly createTrainer: CreateTrainerUseCase,
     private readonly getTrainerTeam: GetTrainerTeamUseCase,
+    private readonly listTrainers: listTrainersUseCase,
   ) {}
 
   create = async (req: Request, res: Response) => {
@@ -26,4 +28,9 @@ export class TrainerController {
     const team = await this.getTrainerTeam.execute(type);
     return res.status(200).json(team);
   };
+
+    list = async (req: Request, res: Response) => { 
+      const trainers = await this.listTrainers.execute(); 
+      return res.status(200).json(trainers); 
+    };
 }
